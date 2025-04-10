@@ -6,10 +6,10 @@ int main(){
         int len_eval = 128;
         int len_com = 493;
         int statistical_sec_bits = 64;
-        int small_set_bits;
        
         // parameter t=log|S|, where S is the small set of the underlying VOLE
-        for (small_set_bits : {6, 8, 10}) {
+        int t_values[3] = {6, 8, 10};
+        for (int small_set_bits : t_values) {
         std::cout << "Bitsize of VOLE set t = " << small_set_bits << std::endl;
         auto sockets = coproto::LocalAsyncSocket::makePair();
 
@@ -46,7 +46,6 @@ TOC(Total OPRF time)
         // TODO: this always says correct: true, even if the ZKP failed.
         std::cout << "Correct: " << std::boolalpha << correct << std::endl;
         
-        // Network traffic
         macoro::sync_wait(sockets[0].flush());
         macoro::sync_wait(sockets[1].flush());
         }
