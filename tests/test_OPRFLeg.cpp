@@ -6,8 +6,11 @@ int main(){
         int len_eval = 128;
         int len_com = 493;
         int statistical_sec_bits = 64;
-        int small_set_bits = 8;
-        
+        int small_set_bits;
+       
+        // parameter t=log|S|, where S is the small set of the underlying VOLE
+        for (small_set_bits : {6, 8, 10}) {
+        std::cout << "Bitsize of VOLE set t = " << small_set_bits << std::endl;
         auto sockets = coproto::LocalAsyncSocket::makePair();
 
         OPRFLeg oprf = OPRFLeg(len_eval,len_com,statistical_sec_bits,small_set_bits);
@@ -46,12 +49,7 @@ TOC(Total OPRF time)
         // Network traffic
         macoro::sync_wait(sockets[0].flush());
         macoro::sync_wait(sockets[1].flush());
-        std::cout << "Client: bytes received at end " << sockets[0].bytesReceived() << std::endl;
-        std::cout << "Client: bytes sent at end " << sockets[0].bytesSent() << std::endl;
-
-        std::cout << "Server: bytes received at end " << sockets[1].bytesReceived() << std::endl;
-        
-        std::cout << "Traffic total " << sockets[1].bytesSent()+sockets[0].bytesSent() << std::endl;
+        }
 
 
 }

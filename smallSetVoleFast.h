@@ -139,7 +139,8 @@ void bytes_to_fe25519(unsigned char *bytes, fe25519 & fe){
 
 /*
  Implements the small domain VOLE protocol from
-https://eprint.iacr.org/2023/996.pdf Fig. 3
+ 'Publicly Verifiable Zero-Knowledge and Post-Quantum Signatures From VOLE-in-the-Head', aka. the FAEST paper.
+  https://eprint.iacr.org/2023/996.pdf Fig. 3
 */
 
 // The subset S_\delta can be of small size. For simplicity, use size as power of 2 because then, one can just use the PPRF for N-1-out-of-N OT from the SoftSpokenVole implementation.
